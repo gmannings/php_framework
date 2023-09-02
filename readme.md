@@ -7,3 +7,14 @@ This project will show some common functionality, albeit, not fully
 featured, to demonstrate common problems and pitfalls that MVC 
 frameworks typically solve.
 
+The website shall be simple and:
+
+1. Have a homepage
+2. Have a login page
+3. Allow a user to login
+4. Show a welcome message after the user is logged in on the homepage
+
+When using this guide, it is recommended to follow the different
+implementations in order, as to understand the challenges, and how MVC
+frameworks may have solved them.
+
