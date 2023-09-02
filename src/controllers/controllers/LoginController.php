@@ -2,6 +2,10 @@
 
 class LoginController extends BaseController {
 
+  protected array $users = [
+    'admin' => 'password123',  // You can add more users here
+  ];
+
   /**
    * @return \ViewDto
    */
@@ -19,7 +23,7 @@ class LoginController extends BaseController {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    if (isset($users[$username]) && $users[$username] == $password) {
+    if (isset($this->users[$username]) && $this->users[$username] == $password) {
       $_SESSION['loggedin'] = TRUE;
       $_SESSION['username'] = $username;
       $this->redirectTo('index.php');

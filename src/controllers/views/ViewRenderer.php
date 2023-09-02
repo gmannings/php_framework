@@ -2,10 +2,25 @@
 
 class ViewRenderer {
 
-  public function __construct(protected Twig\Environment $twig) {}
+  /**
+   * @param \Twig\Environment $twig
+   */
+  public function __construct(
+    protected Twig\Environment $twig,
+  ) {}
 
-  public function render(ViewDto $view) {
-    echo $this->twig->render($view->template, $view->data);
+  /**
+   * @param \ViewDto|null $view
+   *
+   * @return void
+   * @throws \Twig\Error\LoaderError
+   * @throws \Twig\Error\RuntimeError
+   * @throws \Twig\Error\SyntaxError
+   */
+  public function render(?ViewDto $view = NULL): void {
+    if (!is_null($view)) {
+      echo $this->twig->render( $view->template, $view->data);
+    }
   }
 
 }

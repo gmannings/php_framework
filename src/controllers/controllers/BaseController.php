@@ -9,8 +9,8 @@ abstract class BaseController {
    *
    * @return void
    */
-  public function redirectTo(string $location): void {
-    header("Location: ${$location}");
+  protected function redirectTo(string $location): void {
+    header("Location: ${location}");
     exit;
   }
 
