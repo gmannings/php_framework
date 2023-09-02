@@ -1,13 +1,13 @@
 <?php
 
-class LoginController {
+class LoginController extends BaseController {
 
   /**
    * @return \ViewDto
    */
   public function challenge(): ViewDto {
     if (is_logged_in()) {
-      redirect_to('index.php');
+      $this->redirectTo('index.php');
     }
     return new ViewDto('login.twig');
   }
@@ -22,7 +22,7 @@ class LoginController {
     if (isset($users[$username]) && $users[$username] == $password) {
       $_SESSION['loggedin'] = TRUE;
       $_SESSION['username'] = $username;
-      redirect_to('index.php');
+      $this->redirectTo('index.php');
     }
     return new ViewDto('login-error.twig');
   }
@@ -32,7 +32,7 @@ class LoginController {
    */
   public function logout(): void {
     session_destroy();
-    redirect_to('index.php');
+    $this->redirectTo('index.php');
   }
 
 }
