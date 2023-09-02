@@ -1,7 +1,3 @@
 <?php
 
-include 'utils.php';
-
-$viewRenderer->render(
-  $homeController->index()
-);
+include 'bootstrap.php';
