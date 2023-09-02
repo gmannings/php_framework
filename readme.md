@@ -18,3 +18,8 @@ When using this guide, it is recommended to follow the different
 implementations in order, as to understand the challenges, and how MVC
 frameworks may have solved them.
 
+## Contents
+
+1. [Naive implementation](./src/naive/naive-implementation.md)
+2. [DRY step 1](./src/dry-step-1/dry-step-1.md)
+
