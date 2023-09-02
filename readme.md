@@ -41,4 +41,4 @@ Password: `password123`
 1. [Naive implementation](./src/naive/naive-implementation.md)
 2. [DRY step 1](./src/dry-step-1/dry-step-1.md)
 3. [Templating](./src/templating/templating.md)
-
+4. [Controllers](./src/controllers/controllers.md)
