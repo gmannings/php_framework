@@ -22,4 +22,5 @@ frameworks may have solved them.
 
 1. [Naive implementation](./src/naive/naive-implementation.md)
 2. [DRY step 1](./src/dry-step-1/dry-step-1.md)
+3. [Templating](./src/templating/templating.md)
 
