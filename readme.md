@@ -18,6 +18,24 @@ When using this guide, it is recommended to follow the different
 implementations in order, as to understand the challenges, and how MVC
 frameworks may have solved them.
 
+## Running
+
+You can run all implementations using the PHP built-in webserver:
+
+```shell
+cd ./src/{folder}
+php -S localhost:8000
+```
+
+Where `{folder}` is the implementation you want to run.
+
+Using your browser navigate to the address
+[http://localhost:8000](http://localhost:8000) and try logging in. The
+user credentials for a successful login are:
+
+Username: `admin`
+Password: `password123`
+
 ## Contents
 
 1. [Naive implementation](./src/naive/naive-implementation.md)

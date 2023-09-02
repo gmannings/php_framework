@@ -6,22 +6,6 @@ programmer might write when first encountering PHP.
 This implementation does not connect to a database (although it is
 trivial to add, it is not necessary to demonstrate issues).
 
-## Running
-
-You can run this naive implementation using the PHP built-in webserver:
-
-```shell
-cd ./src/naive
-php -S localhost:8000
-```
-
-Using your browser navigate to the address
-[http://localhost:8000](http://localhost:8000) and try logging in. The
-user credentials for a successful login are:
-
-Username: `admin`
-Password: `password123`
-
 ## Understanding
 
 Is this code easy to follow? Are there any problems that you can identify,
