@@ -35,7 +35,9 @@ if (!is_null($routes->getRouteByPath($urlPath))) {
   $action = $route->action;
 
   if ($route->routeAnnotation->method === $_SERVER['REQUEST_METHOD']) {
-    $view = $controller->$action();
+    $view = count($route->getUrlPortions()) > 0 ?
+      $controller->$action(...$route->getUrlPortions()) :
+      $controller->$action();
   }
   else {
     // Handle 405 Invalid method

@@ -8,7 +8,22 @@ class Route {
     readonly string         $controller,
     readonly string         $action,
     readonly RouteAttribute $routeAnnotation,
+    protected array         $urlPortions = [],
   ) {
+  }
+
+  /**
+   * @return array
+   */
+  public function getUrlPortions(): array {
+    return $this->urlPortions;
+  }
+
+  /**
+   * @param array $urlPortions
+   */
+  public function setUrlPortions(array $urlPortions): void {
+    $this->urlPortions = $urlPortions;
   }
 
 }

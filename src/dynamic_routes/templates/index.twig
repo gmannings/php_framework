@@ -4,8 +4,17 @@
 
 {% block content %}
     {% if logged_in %}
-        Welcome, {{ username }}! <a href='/logout'>Logout</a>
+        <p>Welcome, {{ username }}! <a href='/logout'>Logout</a></p>
     {% else %}
-        Welcome to our website! Please <a href='/login'>login</a> to access your account.
+        <p>Welcome to our website! Please <a href='/login'>login</a> to access your account.</p>
     {% endif %}
+    <p>Please visit our pages:</p>
+    <dl>
+        <dt><a href="/page/1">Page 1</a></dt>
+        <dd>Will show content from our dynamic route segments.</dd>
+        <dt><a href="/page/2">Page 2</a></dt>
+        <dd>Will show content from our dynamic route segments.</dd>
+        <dt><a href="/page/3">Page 3</a></dt>
+        <dd>Doesn't exist, so will show a 404 as it does not exist.</dd>
+    </dl>
 {% endblock %}

@@ -84,12 +84,22 @@ class Router {
   public function getRouteByPath(string $path): ?Route {
     $keys = array_keys($this->routes);
 
+    if (isset($this->routes[$path])) {
+      return $this->routes[$path];
+    }
+
     foreach ($keys as $key) {
       // Convert the route key to a regex pattern
+//      $pattern = str_replace($key, '/', '\/');
       $pattern = "#^" . preg_replace('#\{[\w\d]+}#', '([\w\d]+)', $key) . "$#";
+      $route = $this->routes[$key];
+      $result = preg_match($pattern, $path, $matches);
 
-      if (preg_match($pattern, $path)) {
-        return $this->routes[$key];
+      if ($result && $matches > 1) {
+        // remove the full match
+        array_shift($matches);
+        $route->setUrlPortions($matches);
+        return $route;
       }
     }
 
