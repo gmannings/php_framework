@@ -29,3 +29,26 @@ will deserialize the POST request into the DTO so any additional fields
 are ignored.
 
 ## Implementation
+
+I've added a [DTO](model/UserLoginDto.php) that allows properties to be set 
+from an array.
+This is just one approach to some 'magic' that some frameworks perform with
+requests and ensuring type safety. We will expand this when we improve 
+the 'framework' nature of the code we have so far.
+
+**Note:** Many PHP frameworks don't use DTOs in this manner. Instead 
+`Request` objects contain sanitized data properties, allowing you
+to decide how to deserialize into objects if you wish, or pass data around
+in associative arrays. For this example I am using a heavily typed
+approach as it is easier to prevent bugs, and is a personal preference.
+
+The [UserModel](model/UserModel.php) is a relatively simple model, that
+if we want to would be straightforward to convert to an ORM using a framework
+or adding our own. For now it is a datastore, and the only protection
+logic in place is for setting the password into an encrypted version,
+so that if the model is called outside the UserService, at least this
+level of protection is in place.
+
+The [UserService](services/UserService.php) has been updated to handle 
+all the business logic for authenticating a user, whereas the controller
+is now just funneling data between service and the session.

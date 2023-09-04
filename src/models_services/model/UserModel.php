@@ -4,11 +4,14 @@ namespace php_framework\models_services\model;
 
 class UserModel {
 
+  protected string $password;
+
   public function __construct(
     protected string $username,
-    protected string $password,
+    string $password,
     protected bool $isLoggedIn = FALSE,
   ) {
+    $this->setPassword($password);
   }
 
   /**
@@ -23,6 +26,13 @@ class UserModel {
    */
   public function getPassword(): string {
     return $this->password;
+  }
+
+  /**
+   * @param string $password
+   */
+  public function setPassword(string $password): void {
+    $this->password = password_hash($password, PASSWORD_BCRYPT);
   }
 
   /**

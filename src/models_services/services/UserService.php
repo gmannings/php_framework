@@ -17,7 +17,7 @@ class UserService {
     // them from a DB or other persistent store.
     $this->validUsers[] = new UserModel(
       'admin',
-      password_hash('password123', PASSWORD_BCRYPT),
+      'password123',
     );
   }
 
@@ -36,16 +36,13 @@ class UserService {
 
     $matchingUser = array_pop($matchingUsers);
 
-    if (is_null($matchingUser)) {
-      return NULL;
+    if (!is_null($matchingUser)) {
+      if (password_verify($user->getPassword(), $matchingUser->getPassword())) {
+        $matchingUser->setIsLoggedIn(TRUE);
+      }
     }
 
-    if (password_verify($user->getPassword(), $matchingUser->getPassword())) {
-      $matchingUser->setIsLoggedIn(TRUE);
-      return $matchingUser;
-    }
-
-    return NULL;
+    return $matchingUser;
   }
 
 }
