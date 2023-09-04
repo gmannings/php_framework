@@ -1,8 +1,9 @@
 <?php
 
-require_once 'controllers/BaseController.php';
-require_once 'controllers/HomeController.php';
-require_once 'controllers/LoginController.php';
+use php_framework\dry_step_2\controllers\LoginController;
+use php_framework\dry_step_2\controllers\HomeController;
+use php_framework\dry_step_2\router\Route;
+use php_framework\dry_step_2\router\Routes;
 
 // Set up Controllers
 $loginController = new LoginController();

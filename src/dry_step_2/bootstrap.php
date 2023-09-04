@@ -1,11 +1,14 @@
 <?php
 
 require_once '../../vendor/autoload.php';
-require_once 'views/ViewRenderer.php';
-require_once 'views/ViewDto.php';
+
+use php_framework\dry_step_2\views\ViewRenderer;
+use Twig\Environment;
+use Twig\Loader\FilesystemLoader;
+
 // Set up Twig
-$loader = new \Twig\Loader\FilesystemLoader('templates');
-$twig = new \Twig\Environment($loader);
+$loader = new FilesystemLoader('templates');
+$twig = new Environment($loader);
 
 // Set up ViewRenderer
 $viewRenderer = new ViewRenderer(
@@ -20,8 +23,6 @@ $routes = require_once 'routes.php';
 $routes = $routes->getRoutes();
 
 session_start();
-
-const BASE_DIR = __DIR__;
 
 // Get the current URL path without the query string
 $urlPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);

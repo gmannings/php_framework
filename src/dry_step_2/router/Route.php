@@ -1,10 +1,14 @@
 <?php
 
+namespace php_framework\dry_step_2\router;
+
+use php_framework\dry_step_2\controllers\ControllerInterface;
+
 class Route {
 
   public function __construct(
     public string $path,
-    public BaseController $controller,
+    public ControllerInterface $controller,
     public string $action,
   ) {
   }
@@ -17,9 +21,9 @@ class Route {
   }
 
   /**
-   * @return \BaseController
+   * @return \php_framework\dry_step_2\controllers\ControllerInterface
    */
-  public function getController(): BaseController {
+  public function getController(): ControllerInterface {
     return $this->controller;
   }
 

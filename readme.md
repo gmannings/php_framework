@@ -43,4 +43,4 @@ Password: `password123`
 2. [DRY step 1](./src/dry-step-1/dry-step-1.md)
 3. [Templating](./src/templating/templating.md)
 4. [Controllers](./src/controllers/controllers.md)
-5. [DRY step 2](./src/dry-step-2/dry-step-2.md)
+5. [DRY step 2](src/dry_step_2/dry-step-2.md)

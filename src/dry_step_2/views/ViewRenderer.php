@@ -1,16 +1,20 @@
 <?php
 
+namespace php_framework\dry_step_2\views;
+
+use Twig\Environment;
+
 class ViewRenderer {
 
   /**
    * @param \Twig\Environment $twig
    */
   public function __construct(
-    protected Twig\Environment $twig,
+    protected Environment $twig,
   ) {}
 
   /**
-   * @param \ViewDto|null $view
+   * @param \php_framework\dry_step_2\views\ViewDto|null $view
    *
    * @return void
    * @throws \Twig\Error\LoaderError

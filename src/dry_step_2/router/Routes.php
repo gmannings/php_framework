@@ -1,5 +1,7 @@
 <?php
 
+namespace php_framework\dry_step_2\router;
+
 class Routes {
 
   /**
@@ -8,7 +10,7 @@ class Routes {
   protected array $routes = [];
 
   /**
-   * @param \Route $route
+   * @param \php_framework\dry_step_2\router\Route $route
    *
    * @return void
    */
@@ -17,7 +19,7 @@ class Routes {
   }
 
   /**
-   * @return \Route[]
+   * @return \php_framework\dry_step_2\router\Route[]
    */
   public function getRoutes(): array {
     return $this->routes;
