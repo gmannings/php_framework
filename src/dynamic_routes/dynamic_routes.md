@@ -37,10 +37,23 @@ I decided to change the routing mechanism to begin with, as it will
 be easier to extend the objects and functionality once attributes are
 in use.
 
-I wanted each controller method to have the following style of annotation:
+I wanted each controller method to have the following style of attribute:
 
 ```php
-#[Route(path: '/', method: 'GET')]
+#[RouteAnnotation(path: '/', method: 'GET')]
 ```
 
 Where the path and the method refer to the URL request in the domain.
+
+I use string manipulation to retrieve the classname (from the filename), and parse
+the file contents to find the namespace. I then use reflection to
+ensure the controller uses the `ControllerInterface`, then find
+the attributes on each method, then find if it is an instance of 
+`RouteAnnotation`.
+
+Once all of these checks are complete, I parse the routes from the
+metadata available on each controller method, into a `Route` object
+that contains all the necessary data to direct requests to the correct
+method.
+
+I now have a framework for adding controllers and controller methods easily.

@@ -39,11 +39,13 @@ if (!is_null($routes->getRouteByPath($urlPath))) {
   }
   else {
     // Handle 405 Invalid method
+    header("HTTP/1.1 405 Method Not Allowed");
     $view = new ViewDto('405.twig', ['message' => 'Invalid HTTP request method']);
   }
 }
 else {
   // Handle 404 Not Found
+  header("HTTP/1.1 404 Not Found");
   $view = new ViewDto('404.twig', ['message' => 'Page not found']);
 }
 
@@ -51,3 +53,5 @@ else {
 if ($view !== NULL) {
   $viewRenderer->render($view);
 }
+
+exit;
