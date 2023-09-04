@@ -44,3 +44,4 @@ Password: `password123`
 3. [Templating](./src/templating/templating.md)
 4. [Controllers](./src/controllers/controllers.md)
 5. [DRY step 2](src/dry_step_2/dry-step-2.md)
+6. [Model and Services](src/models_services/models_services.md)
