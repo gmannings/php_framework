@@ -4,8 +4,8 @@
 
 {% block content %}
     {% if logged_in %}
-        Welcome, {{ username }}! <a href='logout.php'>Logout</a>
+        Welcome, {{ username }}! <a href='/logout'>Logout</a>
     {% else %}
-        Welcome to our website! Please <a href='login.php'>login</a> to access your account.
+        Welcome to our website! Please <a href='/login'>login</a> to access your account.
     {% endif %}
 {% endblock %}

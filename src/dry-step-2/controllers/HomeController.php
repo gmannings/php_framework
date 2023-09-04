@@ -6,7 +6,7 @@ class HomeController extends BaseController {
     return new ViewDto(
       'index.twig',
       [
-        'logged_in' => is_logged_in(),
+        'logged_in' => $this->isLoggedIn(),
         'username' => $_SESSION['username'] ?? '',
       ]
     );

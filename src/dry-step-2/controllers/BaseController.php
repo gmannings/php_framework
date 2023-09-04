@@ -14,4 +14,11 @@ abstract class BaseController {
     exit;
   }
 
+  /**
+   * @return bool
+   */
+  public function isLoggedIn(): bool {
+    return isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true;
+  }
+
 }
