@@ -82,8 +82,18 @@ class Router {
    * @return \php_framework\dynamic_routes\router\Route|null
    */
   public function getRouteByPath(string $path): ?Route {
-    return $this->routes[$path] ?? NULL;
+    $keys = array_keys($this->routes);
 
+    foreach ($keys as $key) {
+      // Convert the route key to a regex pattern
+      $pattern = "#^" . preg_replace('#\{[\w\d]+}#', '([\w\d]+)', $key) . "$#";
+
+      if (preg_match($pattern, $path)) {
+        return $this->routes[$key];
+      }
+    }
+
+    return NULL;
   }
 
 }
