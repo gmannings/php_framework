@@ -2,9 +2,22 @@
 
 namespace php_framework\models_services\controllers;
 
+use php_framework\models_services\model\UserLoginDto;
+use php_framework\models_services\services\UserService;
 use php_framework\models_services\views\ViewDto;
 
 class LoginController extends BaseController implements ControllerInterface {
+
+  /**
+   * @var \php_framework\models_services\services\UserService
+   */
+  protected UserService $userService;
+
+  public function __construct() {
+    // For now, we will instantiate the UserService here. There are better
+    // approaches we will use as the framework grows.
+    $this->userService = new UserService();
+  }
 
   protected array $users = [
     'admin' => 'password123',  // You can add more users here
@@ -24,12 +37,12 @@ class LoginController extends BaseController implements ControllerInterface {
    * @return \php_framework\models_services\views\ViewDto
    */
   public function process(): ViewDto {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+    $userLoginDto = UserLoginDto::fromArray($_POST);
+    $user = $this->userService->authenticate($userLoginDto);
 
-    if (isset($this->users[$username]) && $this->users[$username] == $password) {
-      $_SESSION['loggedin'] = TRUE;
-      $_SESSION['username'] = $username;
+    if (!is_null($user)) {
+      $_SESSION['loggedin'] = $user->isLoggedIn();
+      $_SESSION['username'] = $user->getUsername();
       $this->redirectTo('/');
     }
     return new ViewDto('login-error.twig');
