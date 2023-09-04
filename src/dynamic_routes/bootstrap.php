@@ -2,6 +2,7 @@
 
 require_once '../../vendor/autoload.php';
 
+use php_framework\dynamic_routes\router\Router;
 use php_framework\dynamic_routes\views\ViewRenderer;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
@@ -15,12 +16,8 @@ $viewRenderer = new ViewRenderer(
   $twig
 );
 
-// Load routes
-require_once 'router/Routes.php';
-require_once 'router/Route.php';
-$routes = require_once 'routes.php';
-
-$routes = $routes->getRoutes();
+$routes = new Router();
+$routes->findControllersWithRoutes('./controllers');
 
 session_start();
 
@@ -29,10 +26,10 @@ $urlPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
 // Check if the path exists in the routes and if so, call the associated controller action
 $view = null;
-if (isset($routes[$urlPath])) {
-  $route = $routes[$urlPath];
-  $controller = $route->getController();
-  $action = $route->getAction();
+if (!is_null($routes->getRouteByPath($urlPath))) {
+  $route = $routes->getRouteByPath($urlPath);
+  $controller = $route->controller;
+  $action = $route->method;
   $view = $controller->$action();
 } else {
   // Handle 404 Not Found

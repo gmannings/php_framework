@@ -33,3 +33,14 @@ each request that matches the requested URL to the correct controller.
 
 ## Implementation
 
+I decided to change the routing mechanism to begin with, as it will
+be easier to extend the objects and functionality once attributes are
+in use.
+
+I wanted each controller method to have the following style of annotation:
+
+```php
+#[Route(path: '/', method: 'GET')]
+```
+
+Where the path and the method refer to the URL request in the domain.
