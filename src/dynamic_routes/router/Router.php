@@ -30,6 +30,12 @@ class Router {
 
       // Get the class name (assuming one class per file and the class name matches the file name)
       $className = $fileInfo->getBasename('.php');
+      $namespace = $this->getNamespaceFromFile($fileInfo->getPathName());
+
+      // If a namespace was found, prepend it to the class name
+      if ($namespace) {
+        $className = $namespace . '\\' . $className;
+      }
 
       // Check if the class implements ControllerInterface
       $reflector = new ReflectionClass($className);
@@ -37,12 +43,11 @@ class Router {
 
         // Check each method for the Route attribute
         foreach ($reflector->getMethods() as $method) {
-          foreach ($method->getAttributes(Route::class) as $attribute) {
+          foreach ($method->getAttributes(RouteAttribute::class) as $attribute) {
             $routeAttribute = $attribute->newInstance();
-
             $this->routes[$routeAttribute->path] = new Route(
               $className,
-              $routeAttribute->method,
+              $method->getName(),
               $routeAttribute
             );
           }
@@ -51,6 +56,22 @@ class Router {
     }
 
     return $this->routes;
+  }
+
+  /**
+   * Namespaces also have to be retrieved to successfully instantiate
+   * controllers.
+   *
+   * @param string $file
+   *
+   * @return string|null
+   */
+  public function getNamespaceFromFile(string $file): ?string {
+    $content = file_get_contents($file);
+    if (preg_match('#^namespace\s+(.+?);#m', $content, $match)) {
+      return $match[1];
+    }
+    return NULL;
   }
 
   /**

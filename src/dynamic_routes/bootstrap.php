@@ -4,6 +4,7 @@ require_once '../../vendor/autoload.php';
 
 use php_framework\dynamic_routes\router\Router;
 use php_framework\dynamic_routes\views\ViewRenderer;
+use php_framework\dynamic_routes\views\ViewDto;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
@@ -25,18 +26,28 @@ session_start();
 $urlPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
 // Check if the path exists in the routes and if so, call the associated controller action
-$view = null;
+$view = NULL;
+
 if (!is_null($routes->getRouteByPath($urlPath))) {
   $route = $routes->getRouteByPath($urlPath);
   $controller = $route->controller;
-  $action = $route->method;
-  $view = $controller->$action();
-} else {
+  $controller = new $controller();
+  $action = $route->action;
+
+  if ($route->routeAnnotation->method === $_SERVER['REQUEST_METHOD']) {
+    $view = $controller->$action();
+  }
+  else {
+    // Handle 405 Invalid method
+    $view = new ViewDto('405.twig', ['message' => 'Invalid HTTP request method']);
+  }
+}
+else {
   // Handle 404 Not Found
   $view = new ViewDto('404.twig', ['message' => 'Page not found']);
 }
 
 // Render the view if it's not null
-if ($view !== null) {
+if ($view !== NULL) {
   $viewRenderer->render($view);
 }
